@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.safety.dao.ICrawlNewsDao" >
+
+<insert id="insert" parameterType="com.cn.safety.pojo.CrawlNews" >
+    insert into t_safety_crawl_news (url, title, avatar, content,region,regionLevel,publishtime)
+    values (#{url,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR},#{region,jdbcType=VARCHAR},#{regionLevel,jdbcType=VARCHAR},#{publishTime,jdbcType=VARCHAR})
+</insert>
+
+  <select id="selectSeedUrls" resultType="String">
+    select url from t_safety_crawl_seed_urls
+  </select>
+  
+  <select id="getNews" resultType="hashmap" parameterType="map" >
+    select * from t_safety_crawl_news where region = #{region} limit #{startRow},#{pageRows}
+  </select>
+</mapper>
